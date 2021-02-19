@@ -1,6 +1,6 @@
 const express = require("express");
-const { route } = require("./app.js");
 const routes = express.Router();
+const debug = require("debug")("hip-app:routes");
 
 module.exports = function (app) {
   let agent_config = {};
@@ -9,7 +9,7 @@ module.exports = function (app) {
       process.env.LP_USER
     ];
   } catch (ex) {
-    log.warn(`[agent.js] Error loading config: ${ex}`);
+    debug(`Error loading config: ${ex}`);
   }
   const agentObj = require("./agent").getInstance(app, agent_config);
 
