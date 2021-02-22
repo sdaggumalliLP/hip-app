@@ -26,9 +26,8 @@ const broadcast = (clients, message) => {
 let instance = null;
 
 class BotAgent {
-  constructor(app, config) {
+  constructor(app) {
     this.app = app;
-    this.config = config;
     this._agent = null;
     this.transferSkill = "277498214";
   }
@@ -44,7 +43,7 @@ class BotAgent {
      *
      * @type {Bot}
      */
-    this._agent = new Bot(this.config);
+    this._agent = new Bot({});
 
     this._agent.on(Bot.const.CONNECTED, (data) => {
       log.info(`[agent.js] CONNECTED ${JSON.stringify(data)}`);
@@ -174,9 +173,9 @@ class BotAgent {
     return this._agent;
   }
 
-  static getInstance(app, config) {
+  static getInstance(app) {
     if (!instance) {
-      instance = new BotAgent(app, config);
+      instance = new BotAgent(app);
     }
 
     return instance;
